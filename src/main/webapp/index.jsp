@@ -22,7 +22,28 @@
       <p>This is the new change that involves Jenkins, Maven, Ansible, Docker, ... in the pipeline! Woohoo!</p>
       <a class="btn btn-primary btn-lg" href="https://www.rmit.edu.vn/about-us/schools-and-centres/school-of-science-engineering-and-technology" role="button">Learn more about SSET</a>
       <a class="btn btn-success btn-lg" href="https://getbootstrap.com/docs/4.3/getting-started/introduction/" role="button">Learn more about Bootstrap CSS Framework</a>
+<%-- Logging code for Challenge 1 --%>
+<%@ page import="java.io.*, java.util.Date, java.text.SimpleDateFormat" %>
+<%
+    try {
+        String logDirPath = "/usr/local/tomcat/logs";
+        String logFilePath = logDirPath + "/app.log";
 
+        File logDir = new File(logDirPath);
+        if (!logDir.exists()) {
+            logDir.mkdirs();
+        }
+
+        PrintWriter outLog = new PrintWriter(new FileWriter(logFilePath, true));
+        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        outLog.println(timestamp + " - Page accessed by a user.");
+        outLog.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+%>
+
+<p style="color: green; margin-top: 15px;"><b>A new log entry was just added to /usr/local/tomcat/logs/app.log!</b></p>
     </div>
     <!-- The content of the website ends here! -->
 
